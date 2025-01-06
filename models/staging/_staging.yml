@@ -1,0 +1,4 @@
+groups:
+  - name: staging
+    owner:
+      name: staging

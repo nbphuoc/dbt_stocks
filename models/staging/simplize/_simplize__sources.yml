@@ -1,0 +1,11 @@
+version: 2
+sources:
+  - name: simplize
+    catalog: "stocks__load"
+    schema: simplize
+    tables:
+      - name: dim_stocks
+      - name: fct_bs
+      - name: fct_cf
+      - name: fct_pnl
+      - name: fct_market
