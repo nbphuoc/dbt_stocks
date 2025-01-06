@@ -1,0 +1,21 @@
+# This file defines dbt profiles for deployed dbt jobs.
+# Note that for local development you should create your own, local profile.
+# (see README.md).
+dbt_stocks:
+  target: dev # default target
+  outputs:
+    base: &base_target
+      type: databricks
+      schema: dbt
+      http_path: /sql/1.0/warehouses/f99cce09d34d45e1
+      threads: 8
+      host: "{{ env_var('DBT_HOST') }}"
+
+    dev:
+      <<: *base_target
+      catalog: "stocks__dev"
+      auth_type: oauth
+    prod:
+      <<: *base_target
+      catalog: "stocks__prod"
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
