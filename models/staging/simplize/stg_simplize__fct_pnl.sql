@@ -5,6 +5,14 @@ with
         select 
             stock_code as fk_stock_id,
             quarter as quarter,
+            date_trunc(
+                'QUARTER',
+                make_date(
+                    cast(substring(quarter, 1, 4) as int),
+                    (cast(substring(quarter, 6, 1) as int) - 1) * 3 + 1,
+                    1
+                )
+            )::date as quarter_start_date,
             `doanh_thu_bán_hàng_và_cung_cấp_dịch_vụ` as sales_revenue,
             `các_khoản_giảm_trừ_doanh_thu` as revenue_deductions,
             `doanh_thu_thuần_về_bán_hàng_và_cung_cấp_dịch_vụ` as net_sales,

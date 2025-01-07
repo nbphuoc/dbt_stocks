@@ -5,6 +5,14 @@ with
         select
             stock_code as fk_stock_id,
             quarter as quarter,
+            date_trunc(
+                'QUARTER',
+                make_date(
+                    cast(substring(quarter, 1, 4) as int),
+                    (cast(substring(quarter, 6, 1) as int) - 1) * 3 + 1,
+                    1
+                )
+            )::date as quarter_start_date,
             `lưu_chuyển_tiền_thuần_từ_hoạt_động_kinh_doanh` as net_cash_flow_operating,
             `lợi_nhuận_trước_thuế` as pretax_profit,
             `điều_chỉnh_cho_các_khoản:` as adjustments,

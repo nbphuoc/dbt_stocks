@@ -5,6 +5,14 @@ with
         select 
             stock_code as stock_code,
             quarter as quarter,
+            date_trunc(
+                'QUARTER',
+                make_date(
+                    cast(substring(quarter, 1, 4) as int),
+                    (cast(substring(quarter, 6, 1) as int) - 1) * 3 + 1,
+                    1
+                )
+            )::date as quarter_start_date,
             `tài_sản_ngắn_hạn` as current_assets,
             `tiền_và_các_khoản_tương_đương_tiền` as cash_and_cash_equivalents,
             `tiền` as cash,
