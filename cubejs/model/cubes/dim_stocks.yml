@@ -1,0 +1,40 @@
+cubes:
+  - name: dim_stocks
+    sql_table: stocks__dev.dbt_marts.dim_stocks
+
+    joins: []
+
+    dimensions:
+      - name: pk_stock_id
+        sql: pk_stock_id
+        type: string
+        primary_key: true
+
+      - name: company_name
+        sql: company_name
+        type: string
+
+      - name: sector_l1
+        sql: sector_l1
+        type: string
+
+      - name: sector_l2
+        sql: sector_l2
+        type: string
+
+      - name: sector_l3
+        sql: sector_l3
+        type: string
+
+      - name: sector_l4
+        sql: sector_l4
+        type: string
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

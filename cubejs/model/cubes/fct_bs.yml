@@ -1,0 +1,860 @@
+cubes:
+  - name: fct_bs
+    sql_table: stocks__dev.dbt_marts.fct_bs
+
+    joins: []
+
+    dimensions:
+      - name: pk_fct_bs_id
+        sql: pk_fct_bs_id
+        type: string
+        primary_key: true
+
+      - name: current_assets
+        sql: current_assets
+        type: number
+
+      - name: cash_and_cash_equivalents
+        sql: cash_and_cash_equivalents
+        type: number
+
+      - name: cash
+        sql: cash
+        type: number
+
+      - name: cash_equivalents
+        sql: cash_equivalents
+        type: number
+
+      - name: short_term_investments
+        sql: short_term_investments
+        type: number
+
+      - name: trading_securities
+        sql: trading_securities
+        type: number
+
+      - name: trading_securities_provision
+        sql: trading_securities_provision
+        type: number
+
+      - name: held_to_maturity_investments
+        sql: held_to_maturity_investments
+        type: number
+
+      - name: short_term_receivables
+        sql: short_term_receivables
+        type: number
+
+      - name: short_term_trade_receivables
+        sql: short_term_trade_receivables
+        type: number
+
+      - name: short_term_advance_to_suppliers
+        sql: short_term_advance_to_suppliers
+        type: number
+
+      - name: short_term_internal_receivables
+        sql: short_term_internal_receivables
+        type: number
+
+      - name: construction_contract_receivables
+        sql: construction_contract_receivables
+        type: number
+
+      - name: short_term_loan_receivables
+        sql: short_term_loan_receivables
+        type: number
+
+      - name: other_short_term_receivables
+        sql: other_short_term_receivables
+        type: number
+
+      - name: short_term_bad_debt_provision
+        sql: short_term_bad_debt_provision
+        type: number
+
+      - name: pending_assets
+        sql: pending_assets
+        type: number
+
+      - name: net_inventory
+        sql: net_inventory
+        type: number
+
+      - name: inventory
+        sql: inventory
+        type: number
+
+      - name: inventory_provision
+        sql: inventory_provision
+        type: number
+
+      - name: other_current_assets
+        sql: other_current_assets
+        type: number
+
+      - name: short_term_prepaid_costs
+        sql: short_term_prepaid_costs
+        type: number
+
+      - name: deductible_vat
+        sql: deductible_vat
+        type: number
+
+      - name: tax_receivables
+        sql: tax_receivables
+        type: number
+
+      - name: government_bond_transactions
+        sql: government_bond_transactions
+        type: number
+
+      - name: non_current_assets
+        sql: non_current_assets
+        type: number
+
+      - name: long_term_receivables
+        sql: long_term_receivables
+        type: number
+
+      - name: long_term_trade_receivables
+        sql: long_term_trade_receivables
+        type: number
+
+      - name: long_term_advance_to_suppliers
+        sql: long_term_advance_to_suppliers
+        type: number
+
+      - name: business_capital_in_subsidiaries
+        sql: business_capital_in_subsidiaries
+        type: number
+
+      - name: long_term_internal_receivables
+        sql: long_term_internal_receivables
+        type: number
+
+      - name: long_term_loan_receivables
+        sql: long_term_loan_receivables
+        type: number
+
+      - name: other_long_term_receivables
+        sql: other_long_term_receivables
+        type: number
+
+      - name: long_term_bad_debt_provision
+        sql: long_term_bad_debt_provision
+        type: number
+
+      - name: fixed_assets
+        sql: fixed_assets
+        type: number
+
+      - name: tangible_fixed_assets
+        sql: tangible_fixed_assets
+        type: number
+
+      - name: tangible_fixed_assets_cost
+        sql: tangible_fixed_assets_cost
+        type: number
+
+      - name: tangible_fixed_assets_depreciation
+        sql: tangible_fixed_assets_depreciation
+        type: number
+
+      - name: finance_leased_assets
+        sql: finance_leased_assets
+        type: number
+
+      - name: finance_leased_assets_cost
+        sql: finance_leased_assets_cost
+        type: number
+
+      - name: finance_leased_assets_depreciation
+        sql: finance_leased_assets_depreciation
+        type: number
+
+      - name: intangible_fixed_assets
+        sql: intangible_fixed_assets
+        type: number
+
+      - name: intangible_fixed_assets_cost
+        sql: intangible_fixed_assets_cost
+        type: number
+
+      - name: intangible_fixed_assets_depreciation
+        sql: intangible_fixed_assets_depreciation
+        type: number
+
+      - name: investment_properties
+        sql: investment_properties
+        type: number
+
+      - name: investment_properties_cost
+        sql: investment_properties_cost
+        type: number
+
+      - name: investment_properties_depreciation
+        sql: investment_properties_depreciation
+        type: number
+
+      - name: long_term_construction_in_progress
+        sql: long_term_construction_in_progress
+        type: number
+
+      - name: long_term_business_construction_costs
+        sql: long_term_business_construction_costs
+        type: number
+
+      - name: basic_construction_in_progress
+        sql: basic_construction_in_progress
+        type: number
+
+      - name: long_term_financial_investments
+        sql: long_term_financial_investments
+        type: number
+
+      - name: investments_in_subsidiaries
+        sql: investments_in_subsidiaries
+        type: number
+
+      - name: investments_in_associates
+        sql: investments_in_associates
+        type: number
+
+      - name: other_long_term_investments
+        sql: other_long_term_investments
+        type: number
+
+      - name: long_term_financial_investment_provision
+        sql: long_term_financial_investment_provision
+        type: number
+
+      - name: other_non_current_assets
+        sql: other_non_current_assets
+        type: number
+
+      - name: long_term_prepaid_costs
+        sql: long_term_prepaid_costs
+        type: number
+
+      - name: deferred_tax_assets
+        sql: deferred_tax_assets
+        type: number
+
+      - name: long_term_spare_parts
+        sql: long_term_spare_parts
+        type: number
+
+      - name: goodwill
+        sql: goodwill
+        type: number
+
+      - name: total_assets
+        sql: total_assets
+        type: number
+
+      - name: liabilities
+        sql: liabilities
+        type: number
+
+      - name: current_liabilities
+        sql: current_liabilities
+        type: number
+
+      - name: short_term_borrowings
+        sql: short_term_borrowings
+        type: number
+
+      - name: short_term_trade_payables
+        sql: short_term_trade_payables
+        type: number
+
+      - name: short_term_advance_from_customers
+        sql: short_term_advance_from_customers
+        type: number
+
+      - name: taxes_payable
+        sql: taxes_payable
+        type: number
+
+      - name: payables_to_employees
+        sql: payables_to_employees
+        type: number
+
+      - name: short_term_accrued_expenses
+        sql: short_term_accrued_expenses
+        type: number
+
+      - name: short_term_internal_payables
+        sql: short_term_internal_payables
+        type: number
+
+      - name: construction_contract_payables
+        sql: construction_contract_payables
+        type: number
+
+      - name: short_term_unearned_revenue
+        sql: short_term_unearned_revenue
+        type: number
+
+      - name: other_payables
+        sql: other_payables
+        type: number
+
+      - name: short_term_provisions
+        sql: short_term_provisions
+        type: number
+
+      - name: bonus_and_welfare_fund
+        sql: bonus_and_welfare_fund
+        type: number
+
+      - name: price_stabilization_fund
+        sql: price_stabilization_fund
+        type: number
+
+      - name: long_term_liabilities
+        sql: long_term_liabilities
+        type: number
+
+      - name: long_term_borrowings
+        sql: long_term_borrowings
+        type: number
+
+      - name: long_term_trade_payables
+        sql: long_term_trade_payables
+        type: number
+
+      - name: long_term_advance_from_customers
+        sql: long_term_advance_from_customers
+        type: number
+
+      - name: long_term_accrued_expenses
+        sql: long_term_accrued_expenses
+        type: number
+
+      - name: internal_payables_for_business_capital
+        sql: internal_payables_for_business_capital
+        type: number
+
+      - name: long_term_internal_payables
+        sql: long_term_internal_payables
+        type: number
+
+      - name: long_term_unearned_revenue
+        sql: long_term_unearned_revenue
+        type: number
+
+      - name: other_long_term_payables
+        sql: other_long_term_payables
+        type: number
+
+      - name: convertible_bonds
+        sql: convertible_bonds
+        type: number
+
+      - name: debt_preferred_shares
+        sql: debt_preferred_shares
+        type: number
+
+      - name: deferred_tax_liabilities
+        sql: deferred_tax_liabilities
+        type: number
+
+      - name: long_term_provisions
+        sql: long_term_provisions
+        type: number
+
+      - name: science_and_technology_development_fund
+        sql: science_and_technology_development_fund
+        type: number
+
+      - name: severance_provision
+        sql: severance_provision
+        type: number
+
+      - name: equity
+        sql: equity
+        type: number
+
+      - name: contributed_capital
+        sql: contributed_capital
+        type: number
+
+      - name: ordinary_shares
+        sql: ordinary_shares
+        type: number
+
+      - name: preferred_shares
+        sql: preferred_shares
+        type: number
+
+      - name: share_premium
+        sql: share_premium
+        type: number
+
+      - name: bond_conversion_rights
+        sql: bond_conversion_rights
+        type: number
+
+      - name: other_equity
+        sql: other_equity
+        type: number
+
+      - name: treasury_shares
+        sql: treasury_shares
+        type: number
+
+      - name: asset_revaluation_reserve
+        sql: asset_revaluation_reserve
+        type: number
+
+      - name: foreign_exchange_difference
+        sql: foreign_exchange_difference
+        type: number
+
+      - name: development_investment_fund
+        sql: development_investment_fund
+        type: number
+
+      - name: business_arrangement_support_fund
+        sql: business_arrangement_support_fund
+        type: number
+
+      - name: other_equity_funds
+        sql: other_equity_funds
+        type: number
+
+      - name: undistributed_profit_after_tax
+        sql: undistributed_profit_after_tax
+        type: number
+
+      - name: cumulative_undistributed_profit_previous_period
+        sql: cumulative_undistributed_profit_previous_period
+        type: number
+
+      - name: undistributed_profit_current_period
+        sql: undistributed_profit_current_period
+        type: number
+
+      - name: non_controlling_interests
+        sql: non_controlling_interests
+        type: number
+
+      - name: other_funds
+        sql: other_funds
+        type: number
+
+      - name: total_equity_and_liabilities
+        sql: total_equity_and_liabilities
+        type: number
+
+      - name: cash_gold_silver_gems
+        sql: cash_gold_silver_gems
+        type: number
+
+      - name: deposits_at_central_bank
+        sql: deposits_at_central_bank
+        type: number
+
+      - name: deposits_and_loans_to_other_credit_institutions
+        sql: deposits_and_loans_to_other_credit_institutions
+        type: number
+
+      - name: derivatives_and_other_financial_assets
+        sql: derivatives_and_other_financial_assets
+        type: number
+
+      - name: loans_to_customers
+        sql: loans_to_customers
+        type: number
+
+      - name: finance_leases_to_customers
+        sql: finance_leases_to_customers
+        type: number
+
+      - name: loan_and_finance_lease_provision
+        sql: loan_and_finance_lease_provision
+        type: number
+
+      - name: debt_purchase_activity
+        sql: debt_purchase_activity
+        type: number
+
+      - name: debt_purchase
+        sql: debt_purchase
+        type: number
+
+      - name: debt_purchase_provision
+        sql: debt_purchase_provision
+        type: number
+
+      - name: investment_securities
+        sql: investment_securities
+        type: number
+
+      - name: available_for_sale_securities
+        sql: available_for_sale_securities
+        type: number
+
+      - name: held_to_maturity_securities
+        sql: held_to_maturity_securities
+        type: number
+
+      - name: investment_securities_provision
+        sql: investment_securities_provision
+        type: number
+
+      - name: long_term_investment_contributions
+        sql: long_term_investment_contributions
+        type: number
+
+      - name: long_term_investment_devaluation_provision
+        sql: long_term_investment_devaluation_provision
+        type: number
+
+      - name: investments_in_joint_ventures
+        sql: investments_in_joint_ventures
+        type: number
+
+      - name: other_assets
+        sql: other_assets
+        type: number
+
+      - name: total_liabilities
+        sql: total_liabilities
+        type: number
+
+      - name: government_and_central_bank_debts
+        sql: government_and_central_bank_debts
+        type: number
+
+      - name: deposits_and_loans_from_other_credit_institutions
+        sql: deposits_and_loans_from_other_credit_institutions
+        type: number
+
+      - name: customer_deposits
+        sql: customer_deposits
+        type: number
+
+      - name: derivatives_and_other_financial_liabilities
+        sql: derivatives_and_other_financial_liabilities
+        type: number
+
+      - name: trust_investment_funds
+        sql: trust_investment_funds
+        type: number
+
+      - name: issued_securities
+        sql: issued_securities
+        type: number
+
+      - name: other_liabilities
+        sql: other_liabilities
+        type: number
+
+      - name: credit_institution_capital
+        sql: credit_institution_capital
+        type: number
+
+      - name: charter_capital
+        sql: charter_capital
+        type: number
+
+      - name: basic_construction_investment_capital
+        sql: basic_construction_investment_capital
+        type: number
+
+      - name: other_capital
+        sql: other_capital
+        type: number
+
+      - name: credit_institution_fund
+        sql: credit_institution_fund
+        type: number
+
+      - name: net_value_of_short_term_financial_assets
+        sql: net_value_of_short_term_financial_assets
+        type: number
+
+      - name: fvtpl_financial_assets
+        sql: fvtpl_financial_assets
+        type: number
+
+      - name: htm_investments
+        sql: htm_investments
+        type: number
+
+      - name: loans
+        sql: loans
+        type: number
+
+      - name: afs_financial_assets
+        sql: afs_financial_assets
+        type: number
+
+      - name: total_receivables
+        sql: total_receivables
+        type: number
+
+      - name: receivables
+        sql: receivables
+        type: number
+
+      - name: receivables_from_securities_services
+        sql: receivables_from_securities_services
+        type: number
+
+      - name: receivables_from_securities_transaction_errors
+        sql: receivables_from_securities_transaction_errors
+        type: number
+
+      - name: receivables_from_securities_trading
+        sql: receivables_from_securities_trading
+        type: number
+
+      - name: receivables_from_construction
+        sql: receivables_from_construction
+        type: number
+
+      - name: receivables_impairment_provision
+        sql: receivables_impairment_provision
+        type: number
+
+      - name: bad_debt_provision
+        sql: bad_debt_provision
+        type: number
+
+      - name: office_supplies
+        sql: office_supplies
+        type: number
+
+      - name: collateral_and_deposits
+        sql: collateral_and_deposits
+        type: number
+
+      - name: other_tax_receivables
+        sql: other_tax_receivables
+        type: number
+
+      - name: other_current_assets_provision
+        sql: other_current_assets_provision
+        type: number
+
+      - name: long_term_financial_assets_provision
+        sql: long_term_financial_assets_provision
+        type: number
+
+      - name: long_term_investments
+        sql: long_term_investments
+        type: number
+
+      - name: long_term_securities_investments
+        sql: long_term_securities_investments
+        type: number
+
+      - name: long_term_pledges_morgage_and_deposits
+        sql: long_term_pledges_morgage_and_deposits
+        type: number
+
+      - name: payments_to_settlement_support_fund
+        sql: payments_to_settlement_support_fund
+        type: number
+
+      - name: long_term_assets_provision
+        sql: long_term_assets_provision
+        type: number
+
+      - name: short_term_financial_asset_loans
+        sql: short_term_financial_asset_loans
+        type: number
+
+      - name: short_term_convertible_bonds
+        sql: short_term_convertible_bonds
+        type: number
+
+      - name: short_term_issued_bonds
+        sql: short_term_issued_bonds
+        type: number
+
+      - name: loans_from_settlement_support_fund
+        sql: loans_from_settlement_support_fund
+        type: number
+
+      - name: payables_from_securities_trading
+        sql: payables_from_securities_trading
+        type: number
+
+      - name: payables_from_financial_transaction_errors
+        sql: payables_from_financial_transaction_errors
+        type: number
+
+      - name: tax_payables
+        sql: tax_payables
+        type: number
+
+      - name: employee_benefits_payables
+        sql: employee_benefits_payables
+        type: number
+
+      - name: short_term_collateral_received
+        sql: short_term_collateral_received
+        type: number
+
+      - name: payables_from_construction
+        sql: payables_from_construction
+        type: number
+
+      - name: dividend_and_bond_interest_payables
+        sql: dividend_and_bond_interest_payables
+        type: number
+
+      - name: payables_to_securities_issuers
+        sql: payables_to_securities_issuers
+        type: number
+
+      - name: long_term_financial_asset_loans
+        sql: long_term_financial_asset_loans
+        type: number
+
+      - name: long_term_convertible_bonds
+        sql: long_term_convertible_bonds
+        type: number
+
+      - name: long_term_issued_bonds
+        sql: long_term_issued_bonds
+        type: number
+
+      - name: long_term_collateral_and_deposits
+        sql: long_term_collateral_and_deposits
+        type: number
+
+      - name: investor_protection_fund
+        sql: investor_protection_fund
+        type: number
+
+      - name: statutory_reserve_fund
+        sql: statutory_reserve_fund
+        type: number
+
+      - name: financial_reserve_fund
+        sql: financial_reserve_fund
+        type: number
+
+      - name: insurance_contract_receivables
+        sql: insurance_contract_receivables
+        type: number
+
+      - name: other_customer_receivables
+        sql: other_customer_receivables
+        type: number
+
+      - name: advances
+        sql: advances
+        type: number
+
+      - name: receivables_from_financial_investments
+        sql: receivables_from_financial_investments
+        type: number
+
+      - name: unallocated_commission_expenses
+        sql: unallocated_commission_expenses
+        type: number
+
+      - name: other_short_term_prepaid_costs
+        sql: other_short_term_prepaid_costs
+        type: number
+
+      - name: reinsurance_assets
+        sql: reinsurance_assets
+        type: number
+
+      - name: reinsurance_fee_provision
+        sql: reinsurance_fee_provision
+        type: number
+
+      - name: reinsurance_compensation_provision
+        sql: reinsurance_compensation_provision
+        type: number
+
+      - name: insurance_collateral
+        sql: insurance_collateral
+        type: number
+
+      - name: long_term_collateral_assets
+        sql: long_term_collateral_assets
+        type: number
+
+      - name: short_term_loans_and_debts
+        sql: short_term_loans_and_debts
+        type: number
+
+      - name: trade_payables
+        sql: trade_payables
+        type: number
+
+      - name: insurance_contract_payables
+        sql: insurance_contract_payables
+        type: number
+
+      - name: other_payables_to_sellers
+        sql: other_payables_to_sellers
+        type: number
+
+      - name: unearned_commission_revenue
+        sql: unearned_commission_revenue
+        type: number
+
+      - name: insurance_provision
+        sql: insurance_provision
+        type: number
+
+      - name: original_and_reinsurance_fee_provision
+        sql: original_and_reinsurance_fee_provision
+        type: number
+
+      - name: mathematical_provision
+        sql: mathematical_provision
+        type: number
+
+      - name: original_and_reinsurance_compensation_provision
+        sql: original_and_reinsurance_compensation_provision
+        type: number
+
+      - name: large_fluctuation_provision
+        sql: large_fluctuation_provision
+        type: number
+
+      - name: profit_sharing_provision
+        sql: profit_sharing_provision
+        type: number
+
+      - name: balance_guarantee_provision
+        sql: balance_guarantee_provision
+        type: number
+
+      - name: mandatory_reserve_fund
+        sql: mandatory_reserve_fund
+        type: number
+
+      - name: fk_stock_id
+        sql: fk_stock_id
+        type: string
+
+      - name: quarter
+        sql: quarter
+        type: string
+
+      - name: quarter_start_date
+        sql: quarter_start_date
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

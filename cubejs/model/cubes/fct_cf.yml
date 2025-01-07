@@ -1,0 +1,460 @@
+cubes:
+  - name: fct_cf
+    sql_table: stocks__dev.dbt_marts.fct_cf
+
+    joins: []
+
+    dimensions:
+      - name: pk_fct_cf_id
+        sql: pk_fct_cf_id
+        type: string
+        primary_key: true
+
+      - name: net_cash_flow_operating
+        sql: net_cash_flow_operating
+        type: number
+
+      - name: pretax_profit
+        sql: pretax_profit
+        type: number
+
+      - name: adjustments
+        sql: adjustments
+        type: number
+
+      - name: depreciation
+        sql: depreciation
+        type: number
+
+      - name: goodwill_amortization
+        sql: goodwill_amortization
+        type: number
+
+      - name: provisions
+        sql: provisions
+        type: number
+
+      - name: forex_gain_loss
+        sql: forex_gain_loss
+        type: number
+
+      - name: asset_disposal_gain_loss
+        sql: asset_disposal_gain_loss
+        type: number
+
+      - name: investment_gain_loss
+        sql: investment_gain_loss
+        type: number
+
+      - name: interest_expense
+        sql: interest_expense
+        type: number
+
+      - name: interest_dividends_received
+        sql: interest_dividends_received
+        type: number
+
+      - name: other_adjustments
+        sql: other_adjustments
+        type: number
+
+      - name: operating_profit_before_working_capital
+        sql: operating_profit_before_working_capital
+        type: number
+
+      - name: change_in_receivables
+        sql: change_in_receivables
+        type: number
+
+      - name: change_in_inventory
+        sql: change_in_inventory
+        type: number
+
+      - name: change_in_payables_excluding_interest_tax
+        sql: change_in_payables_excluding_interest_tax
+        type: number
+
+      - name: change_in_prepaid_expenses
+        sql: change_in_prepaid_expenses
+        type: number
+
+      - name: change_in_trading_securities
+        sql: change_in_trading_securities
+        type: number
+
+      - name: income_tax_paid
+        sql: income_tax_paid
+        type: number
+
+      - name: interest_paid
+        sql: interest_paid
+        type: number
+
+      - name: other_operating_cash_inflows
+        sql: other_operating_cash_inflows
+        type: number
+
+      - name: other_operating_cash_outflows
+        sql: other_operating_cash_outflows
+        type: number
+
+      - name: net_cash_flow_investing
+        sql: net_cash_flow_investing
+        type: number
+
+      - name: purchase_of_fixed_assets
+        sql: purchase_of_fixed_assets
+        type: number
+
+      - name: proceeds_from_asset_disposal
+        sql: proceeds_from_asset_disposal
+        type: number
+
+      - name: loans_to_other_entities
+        sql: loans_to_other_entities
+        type: number
+
+      - name: repayments_of_loans_to_other_entities
+        sql: repayments_of_loans_to_other_entities
+        type: number
+
+      - name: investments_in_other_entities
+        sql: investments_in_other_entities
+        type: number
+
+      - name: divestments_from_other_entities
+        sql: divestments_from_other_entities
+        type: number
+
+      - name: interest_dividends_and_profit_distributions
+        sql: interest_dividends_and_profit_distributions
+        type: number
+
+      - name: net_cash_flow_financing
+        sql: net_cash_flow_financing
+        type: number
+
+      - name: proceeds_from_share_issuance
+        sql: proceeds_from_share_issuance
+        type: number
+
+      - name: payments_for_share_buybacks
+        sql: payments_for_share_buybacks
+        type: number
+
+      - name: proceeds_from_borrowings
+        sql: proceeds_from_borrowings
+        type: number
+
+      - name: repayments_of_borrowings
+        sql: repayments_of_borrowings
+        type: number
+
+      - name: lease_liability_payments
+        sql: lease_liability_payments
+        type: number
+
+      - name: dividends_paid
+        sql: dividends_paid
+        type: number
+
+      - name: net_cash_flow_for_period
+        sql: net_cash_flow_for_period
+        type: number
+
+      - name: cash_and_cash_equivalents_beginning
+        sql: cash_and_cash_equivalents_beginning
+        type: number
+
+      - name: effect_of_foreign_exchange_rate_changes
+        sql: effect_of_foreign_exchange_rate_changes
+        type: number
+
+      - name: cash_and_cash_equivalents_ending
+        sql: cash_and_cash_equivalents_ending
+        type: number
+
+      - name: interest_income_received
+        sql: interest_income_received
+        type: number
+
+      - name: interest_expense_paid
+        sql: interest_expense_paid
+        type: number
+
+      - name: service_income_received
+        sql: service_income_received
+        type: number
+
+      - name: net_cash_from_forex_gold_securities
+        sql: net_cash_from_forex_gold_securities
+        type: number
+
+      - name: other_income
+        sql: other_income
+        type: number
+
+      - name: recoveries_of_written_off_debts
+        sql: recoveries_of_written_off_debts
+        type: number
+
+      - name: payments_to_employees_and_management
+        sql: payments_to_employees_and_management
+        type: number
+
+      - name: income_tax_paid_during_period
+        sql: income_tax_paid_during_period
+        type: number
+
+      - name: net_cash_flow_operating_before_changes
+        sql: net_cash_flow_operating_before_changes
+        type: number
+
+      - name: changes_in_operating_assets
+        sql: changes_in_operating_assets
+        type: number
+
+      - name: change_in_gold_deposits_and_loans
+        sql: change_in_gold_deposits_and_loans
+        type: number
+
+      - name: change_in_securities_business
+        sql: change_in_securities_business
+        type: number
+
+      - name: change_in_derivatives_and_other_financial_assets
+        sql: change_in_derivatives_and_other_financial_assets
+        type: number
+
+      - name: change_in_customer_loans
+        sql: change_in_customer_loans
+        type: number
+
+      - name: reduction_in_provision_sources
+        sql: reduction_in_provision_sources
+        type: number
+
+      - name: other_changes_in_operating_assets
+        sql: other_changes_in_operating_assets
+        type: number
+
+      - name: changes_in_operating_liabilities
+        sql: changes_in_operating_liabilities
+        type: number
+
+      - name: change_in_government_and_central_bank_debts
+        sql: change_in_government_and_central_bank_debts
+        type: number
+
+      - name: change_in_deposits_and_loans
+        sql: change_in_deposits_and_loans
+        type: number
+
+      - name: change_in_customer_deposits
+        sql: change_in_customer_deposits
+        type: number
+
+      - name: change_in_issued_securities
+        sql: change_in_issued_securities
+        type: number
+
+      - name: change_in_trust_investment_funds
+        sql: change_in_trust_investment_funds
+        type: number
+
+      - name: change_in_derivatives_and_other_financial_liabilities
+        sql: change_in_derivatives_and_other_financial_liabilities
+        type: number
+
+      - name: change_in_interest_payables
+        sql: change_in_interest_payables
+        type: number
+
+      - name: other_changes_in_operating_liabilities
+        sql: other_changes_in_operating_liabilities
+        type: number
+
+      - name: disbursements_from_credit_funds
+        sql: disbursements_from_credit_funds
+        type: number
+
+      - name: payments_for_asset_disposal
+        sql: payments_for_asset_disposal
+        type: number
+
+      - name: purchase_of_investment_properties
+        sql: purchase_of_investment_properties
+        type: number
+
+      - name: proceeds_from_investment_property_disposal
+        sql: proceeds_from_investment_property_disposal
+        type: number
+
+      - name: payments_for_investment_property_disposal
+        sql: payments_for_investment_property_disposal
+        type: number
+
+      - name: proceeds_from_long_term_securities
+        sql: proceeds_from_long_term_securities
+        type: number
+
+      - name: payments_for_long_term_securities
+        sql: payments_for_long_term_securities
+        type: number
+
+      - name: purchase_of_treasury_shares
+        sql: purchase_of_treasury_shares
+        type: number
+
+      - name: proceeds_from_treasury_shares
+        sql: proceeds_from_treasury_shares
+        type: number
+
+      - name: investment_in_subsidiaries_gain_loss
+        sql: investment_in_subsidiaries_gain_loss
+        type: number
+
+      - name: accrued_interest_income
+        sql: accrued_interest_income
+        type: number
+
+      - name: increase_in_non_monetary_expenses
+        sql: increase_in_non_monetary_expenses
+        type: number
+
+      - name: fvtpl_assets_revaluation_loss
+        sql: fvtpl_assets_revaluation_loss
+        type: number
+
+      - name: htm_investment_impairment_loss
+        sql: htm_investment_impairment_loss
+        type: number
+
+      - name: loan_impairment_loss
+        sql: loan_impairment_loss
+        type: number
+
+      - name: afs_assets_revaluation_loss
+        sql: afs_assets_revaluation_loss
+        type: number
+
+      - name: impairment_of_fixed_assets
+        sql: impairment_of_fixed_assets
+        type: number
+
+      - name: long_term_investment_provision_expense
+        sql: long_term_investment_provision_expense
+        type: number
+
+      - name: other_losses
+        sql: other_losses
+        type: number
+
+      - name: decrease_in_non_monetary_revenues
+        sql: decrease_in_non_monetary_revenues
+        type: number
+
+      - name: fvtpl_assets_revaluation_gain
+        sql: fvtpl_assets_revaluation_gain
+        type: number
+
+      - name: afs_assets_revaluation_gain
+        sql: afs_assets_revaluation_gain
+        type: number
+
+      - name: other_gains
+        sql: other_gains
+        type: number
+
+      - name: changes_in_assets_and_liabilities
+        sql: changes_in_assets_and_liabilities
+        type: number
+
+      - name: change_in_fvtpl_assets
+        sql: change_in_fvtpl_assets
+        type: number
+
+      - name: change_in_htm_investments
+        sql: change_in_htm_investments
+        type: number
+
+      - name: change_in_loans
+        sql: change_in_loans
+        type: number
+
+      - name: change_in_afs_assets
+        sql: change_in_afs_assets
+        type: number
+
+      - name: change_in_receivables_from_asset_sales
+        sql: change_in_receivables_from_asset_sales
+        type: number
+
+      - name: change_in_dividend_interest_receivables
+        sql: change_in_dividend_interest_receivables
+        type: number
+
+      - name: change_in_receivables_from_services
+        sql: change_in_receivables_from_services
+        type: number
+
+      - name: change_in_receivables_from_transaction_errors
+        sql: change_in_receivables_from_transaction_errors
+        type: number
+
+      - name: change_in_other_receivables
+        sql: change_in_other_receivables
+        type: number
+
+      - name: change_in_other_assets
+        sql: change_in_other_assets
+        type: number
+
+      - name: change_in_accrued_expenses_excluding_interest
+        sql: change_in_accrued_expenses_excluding_interest
+        type: number
+
+      - name: change_in_payables_to_suppliers
+        sql: change_in_payables_to_suppliers
+        type: number
+
+      - name: change_in_employee_benefits
+        sql: change_in_employee_benefits
+        type: number
+
+      - name: change_in_taxes_payable
+        sql: change_in_taxes_payable
+        type: number
+
+      - name: change_in_payables_to_employees
+        sql: change_in_payables_to_employees
+        type: number
+
+      - name: change_in_payables_from_transaction_errors
+        sql: change_in_payables_from_transaction_errors
+        type: number
+
+      - name: change_in_other_payables
+        sql: change_in_other_payables
+        type: number
+
+      - name: fk_stock_id
+        sql: fk_stock_id
+        type: string
+
+      - name: quarter
+        sql: quarter
+        type: string
+
+      - name: quarter_start_date
+        sql: quarter_start_date
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

@@ -1,0 +1,528 @@
+cubes:
+  - name: fct_pnl
+    sql_table: stocks__dev.dbt_marts.fct_pnl
+
+    joins: []
+
+    dimensions:
+      - name: pk_fct_pnl_id
+        sql: pk_fct_pnl_id
+        type: string
+        primary_key: true
+
+      - name: sales_revenue
+        sql: sales_revenue
+        type: number
+
+      - name: revenue_deductions
+        sql: revenue_deductions
+        type: number
+
+      - name: net_sales
+        sql: net_sales
+        type: number
+
+      - name: cogs
+        sql: cogs
+        type: number
+
+      - name: gross_profit_from_sales
+        sql: gross_profit_from_sales
+        type: number
+
+      - name: financial_income
+        sql: financial_income
+        type: number
+
+      - name: financial_expense
+        sql: financial_expense
+        type: number
+
+      - name: interest_expense
+        sql: interest_expense
+        type: number
+
+      - name: assoc_profit
+        sql: assoc_profit
+        type: number
+
+      - name: selling_expense
+        sql: selling_expense
+        type: number
+
+      - name: admin_expense
+        sql: admin_expense
+        type: number
+
+      - name: operating_profit
+        sql: operating_profit
+        type: number
+
+      - name: other_profit
+        sql: other_profit
+        type: number
+
+      - name: other_income
+        sql: other_income
+        type: number
+
+      - name: other_expense
+        sql: other_expense
+        type: number
+
+      - name: pretax_profit
+        sql: pretax_profit
+        type: number
+
+      - name: income_tax
+        sql: income_tax
+        type: number
+
+      - name: current_tax
+        sql: current_tax
+        type: number
+
+      - name: deferred_tax
+        sql: deferred_tax
+        type: number
+
+      - name: net_profit
+        sql: net_profit
+        type: number
+
+      - name: parent_profit
+        sql: parent_profit
+        type: number
+
+      - name: minority_profit
+        sql: minority_profit
+        type: number
+
+      - name: net_interest_income
+        sql: net_interest_income
+        type: number
+
+      - name: interest_income
+        sql: interest_income
+        type: number
+
+      - name: interest_expense_and_similar_costs
+        sql: interest_expense_and_similar_costs
+        type: number
+
+      - name: net_service_profit
+        sql: net_service_profit
+        type: number
+
+      - name: service_income
+        sql: service_income
+        type: number
+
+      - name: service_expense
+        sql: service_expense
+        type: number
+
+      - name: forex_gold_profit
+        sql: forex_gold_profit
+        type: number
+
+      - name: trading_securities_profit
+        sql: trading_securities_profit
+        type: number
+
+      - name: investment_securities_profit
+        sql: investment_securities_profit
+        type: number
+
+      - name: other_activities_profit
+        sql: other_activities_profit
+        type: number
+
+      - name: other_activities_income
+        sql: other_activities_income
+        type: number
+
+      - name: other_activities_expense
+        sql: other_activities_expense
+        type: number
+
+      - name: equity_investment_income
+        sql: equity_investment_income
+        type: number
+
+      - name: total_operating_income
+        sql: total_operating_income
+        type: number
+
+      - name: operating_expense
+        sql: operating_expense
+        type: number
+
+      - name: net_operating_profit_before_provision
+        sql: net_operating_profit_before_provision
+        type: number
+
+      - name: credit_risk_provision
+        sql: credit_risk_provision
+        type: number
+
+      - name: operating_revenue
+        sql: operating_revenue
+        type: number
+
+      - name: fvtpl_assets_profit
+        sql: fvtpl_assets_profit
+        type: number
+
+      - name: financial_assets_sale_profit
+        sql: financial_assets_sale_profit
+        type: number
+
+      - name: revaluation_gain
+        sql: revaluation_gain
+        type: number
+
+      - name: fvtpl_dividend_income
+        sql: fvtpl_dividend_income
+        type: number
+
+      - name: htm_investment_profit
+        sql: htm_investment_profit
+        type: number
+
+      - name: loan_receivable_profit
+        sql: loan_receivable_profit
+        type: number
+
+      - name: afs_assets_profit
+        sql: afs_assets_profit
+        type: number
+
+      - name: hedging_instruments_profit
+        sql: hedging_instruments_profit
+        type: number
+
+      - name: brokerage_income
+        sql: brokerage_income
+        type: number
+
+      - name: underwriting_income
+        sql: underwriting_income
+        type: number
+
+      - name: agency_income
+        sql: agency_income
+        type: number
+
+      - name: investment_advisory_income
+        sql: investment_advisory_income
+        type: number
+
+      - name: auction_income
+        sql: auction_income
+        type: number
+
+      - name: custody_income
+        sql: custody_income
+        type: number
+
+      - name: investment_income
+        sql: investment_income
+        type: number
+
+      - name: asset_rental_income
+        sql: asset_rental_income
+        type: number
+
+      - name: financial_advisory_income
+        sql: financial_advisory_income
+        type: number
+
+      - name: other_revenue
+        sql: other_revenue
+        type: number
+
+      - name: net_revenue
+        sql: net_revenue
+        type: number
+
+      - name: business_expense
+        sql: business_expense
+        type: number
+
+      - name: fvtpl_assets_loss
+        sql: fvtpl_assets_loss
+        type: number
+
+      - name: financial_assets_sale_loss
+        sql: financial_assets_sale_loss
+        type: number
+
+      - name: revaluation_loss
+        sql: revaluation_loss
+        type: number
+
+      - name: fvtpl_transaction_cost
+        sql: fvtpl_transaction_cost
+        type: number
+
+      - name: htm_investment_loss
+        sql: htm_investment_loss
+        type: number
+
+      - name: loan_receivable_loss
+        sql: loan_receivable_loss
+        type: number
+
+      - name: afs_assets_loss
+        sql: afs_assets_loss
+        type: number
+
+      - name: financial_assets_provision
+        sql: financial_assets_provision
+        type: number
+
+      - name: hedging_instruments_loss
+        sql: hedging_instruments_loss
+        type: number
+
+      - name: proprietary_trading_expense
+        sql: proprietary_trading_expense
+        type: number
+
+      - name: brokerage_expense
+        sql: brokerage_expense
+        type: number
+
+      - name: underwriting_expense
+        sql: underwriting_expense
+        type: number
+
+      - name: investment_advisory_expense
+        sql: investment_advisory_expense
+        type: number
+
+      - name: auction_expense
+        sql: auction_expense
+        type: number
+
+      - name: custody_expense
+        sql: custody_expense
+        type: number
+
+      - name: financial_advisory_expense
+        sql: financial_advisory_expense
+        type: number
+
+      - name: other_services_expense
+        sql: other_services_expense
+        type: number
+
+      - name: gross_profit
+        sql: gross_profit
+        type: number
+
+      - name: forex_gain
+        sql: forex_gain
+        type: number
+
+      - name: dividend_interest_income
+        sql: dividend_interest_income
+        type: number
+
+      - name: investment_disposal_profit
+        sql: investment_disposal_profit
+        type: number
+
+      - name: other_investment_income
+        sql: other_investment_income
+        type: number
+
+      - name: forex_loss
+        sql: forex_loss
+        type: number
+
+      - name: investment_disposal_loss
+        sql: investment_disposal_loss
+        type: number
+
+      - name: long_term_investment_provision
+        sql: long_term_investment_provision
+        type: number
+
+      - name: other_financial_expense
+        sql: other_financial_expense
+        type: number
+
+      - name: securities_management_expense
+        sql: securities_management_expense
+        type: number
+
+      - name: operating_result
+        sql: operating_result
+        type: number
+
+      - name: insurance_fee_income
+        sql: insurance_fee_income
+        type: number
+
+      - name: original_insurance_fee
+        sql: original_insurance_fee
+        type: number
+
+      - name: reinsurance_fee
+        sql: reinsurance_fee
+        type: number
+
+      - name: insurance_provision_increase
+        sql: insurance_provision_increase
+        type: number
+
+      - name: reinsurance_transfer_fee
+        sql: reinsurance_transfer_fee
+        type: number
+
+      - name: total_reinsurance_transfer_fee
+        sql: total_reinsurance_transfer_fee
+        type: number
+
+      - name: reinsurance_provision_increase
+        sql: reinsurance_provision_increase
+        type: number
+
+      - name: net_insurance_fee_income
+        sql: net_insurance_fee_income
+        type: number
+
+      - name: reinsurance_commission_and_other_insurance_income
+        sql: reinsurance_commission_and_other_insurance_income
+        type: number
+
+      - name: reinsurance_commission
+        sql: reinsurance_commission
+        type: number
+
+      - name: other_insurance_income
+        sql: other_insurance_income
+        type: number
+
+      - name: net_insurance_income
+        sql: net_insurance_income
+        type: number
+
+      - name: compensation_expense
+        sql: compensation_expense
+        type: number
+
+      - name: total_compensation_expense
+        sql: total_compensation_expense
+        type: number
+
+      - name: deductions
+        sql: deductions
+        type: number
+
+      - name: reinsurance_compensation_income
+        sql: reinsurance_compensation_income
+        type: number
+
+      - name: math_provision_change
+        sql: math_provision_change
+        type: number
+
+      - name: insurance_compensation_provision_increase
+        sql: insurance_compensation_provision_increase
+        type: number
+
+      - name: reinsurance_compensation_provision_increase
+        sql: reinsurance_compensation_provision_increase
+        type: number
+
+      - name: total_insurance_compensation_expense
+        sql: total_insurance_compensation_expense
+        type: number
+
+      - name: large_fluctuation_provision_increase
+        sql: large_fluctuation_provision_increase
+        type: number
+
+      - name: large_fluctuation_provision_usage
+        sql: large_fluctuation_provision_usage
+        type: number
+
+      - name: other_insurance_expense
+        sql: other_insurance_expense
+        type: number
+
+      - name: original_insurance_commission
+        sql: original_insurance_commission
+        type: number
+
+      - name: other_original_insurance_expense
+        sql: other_original_insurance_expense
+        type: number
+
+      - name: other_reinsurance_expense
+        sql: other_reinsurance_expense
+        type: number
+
+      - name: reinsurance_transfer_expense
+        sql: reinsurance_transfer_expense
+        type: number
+
+      - name: total_insurance_business_expense
+        sql: total_insurance_business_expense
+        type: number
+
+      - name: gross_insurance_profit
+        sql: gross_insurance_profit
+        type: number
+
+      - name: net_insurance_profit
+        sql: net_insurance_profit
+        type: number
+
+      - name: financial_profit
+        sql: financial_profit
+        type: number
+
+      - name: financial_revenue
+        sql: financial_revenue
+        type: number
+
+      - name: real_estate_investment_profit
+        sql: real_estate_investment_profit
+        type: number
+
+      - name: net_banking_profit
+        sql: net_banking_profit
+        type: number
+
+      - name: other_operating_profit
+        sql: other_operating_profit
+        type: number
+
+      - name: net_other_income
+        sql: net_other_income
+        type: number
+
+      - name: fk_stock_id
+        sql: fk_stock_id
+        type: string
+
+      - name: quarter
+        sql: quarter
+        type: string
+
+      - name: quarter_start_date
+        sql: quarter_start_date
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

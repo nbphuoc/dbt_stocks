@@ -1,0 +1,48 @@
+cubes:
+  - name: fct_market
+    sql_table: stocks__dev.dbt_marts.fct_market
+
+    joins: []
+
+    dimensions:
+      - name: pk_fct_market_id
+        sql: pk_fct_market_id
+        type: string
+        primary_key: true
+
+      - name: close_price
+        sql: close_price
+        type: number
+
+      - name: trading_volume
+        sql: trading_volume
+        type: number
+
+      - name: market_cap
+        sql: market_cap
+        type: number
+
+      - name: shares_outstanding
+        sql: shares_outstanding
+        type: number
+
+      - name: calculated_market_cap
+        sql: calculated_market_cap
+        type: number
+
+      - name: fk_stock_id
+        sql: fk_stock_id
+        type: string
+
+      - name: date
+        sql: date
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+
