@@ -3,7 +3,7 @@ with
 
     renamed as (
         select 
-            stock_code as stock_code,
+            stock_code as fk_stock_id,
             quarter as quarter,
             date_trunc(
                 'QUARTER',
