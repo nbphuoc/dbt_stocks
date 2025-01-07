@@ -219,7 +219,21 @@ with
             `dự_phòng_dao_động_lớn` as large_fluctuation_provision,
             `dự_phòng_chia_lãi` as profit_sharing_provision,
             `dự_phòng_đảm_bảo_cân_đối` as balance_guarantee_provision,
-            `quỹ_dự_trữ_bắt_buộc` as mandatory_reserve_fund
+            `quỹ_dự_trữ_bắt_buộc` as mandatory_reserve_fund,
+            ---
+            coalesce(convertible_bonds, 0)
+            + coalesce(long_term_convertible_bonds, 0)
+            + coalesce(long_term_issued_bonds, 0)
+            + coalesce(preferred_shares, 0)
+            + coalesce(debt_preferred_shares, 0)
+            + coalesce(long_term_borrowings, 0)
+            + coalesce(long_term_financial_asset_loans, 0) as long_term_debt,
+
+            coalesce(short_term_borrowings, 0)
+            + coalesce(short_term_loans_and_debts, 0)
+            + coalesce(short_term_convertible_bonds, 0)
+            + coalesce(short_term_issued_bonds, 0)
+            + coalesce(short_term_financial_asset_loans, 0) as short_term_debt
         from source
     )
 
