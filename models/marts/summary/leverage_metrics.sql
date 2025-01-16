@@ -47,13 +47,16 @@ with
             bs.quarter_start_date,
             bs.quarter,
             bs.total_debt as l1__total_debt,
-            (pnl.l4q_net_profit + cf.l4q_da)
-            / bs.total_liabilities as l2__interest_coverage,
-            bs.total_liabilities / bs.total_assets as l3__liabilities_to_assets,
-            bs.total_liabilities / bs.equity as l4__liabilities_to_equity,
-            bs.long_term_debt / bs.equity as l5__lt_debt_to_equity,
-            bs.short_term_debt / bs.equity as l6__st_debt_to_equity,
-            bs.total_debt / bs.equity as l7__total_debt_to_equity,
+            try_divide(
+                (pnl.l4q_net_profit + cf.l4q_da), bs.total_liabilities
+            ) as l2__interest_coverage,
+            try_divide(
+                bs.total_liabilities, bs.total_assets
+            ) as l3__liabilities_to_assets,
+            try_divide(bs.total_liabilities, bs.equity) as l4__liabilities_to_equity,
+            try_divide(bs.long_term_debt, bs.equity) as l5__lt_debt_to_equity,
+            try_divide(bs.short_term_debt, bs.equity) as l6__st_debt_to_equity,
+            try_divide(bs.total_debt, bs.equity) as l7__total_debt_to_equity,
             bs.total_debt - bs.prev_total_debt as l8__debt_change
         from fct_bs as bs
         left join

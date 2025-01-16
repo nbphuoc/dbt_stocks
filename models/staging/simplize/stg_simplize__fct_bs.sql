@@ -415,7 +415,17 @@ with
             coalesce(`quỹ_dự_trữ_bắt_buộc`, 0) as quy_du_tru_bat_buoc,
             coalesce(`vốn_điều_lệ`, 0) as von_dieu_le,
             --
-            coalesce(tong_no_phai_tra, no_phai_tra) as total_liabilities,
+            tien_va_cac_khoan_tuong_duong_tien
+            + dau_tu_nam_giu_den_ngay_dao_han
+            + chung_khoan_dau_tu_nam_giu_den_ngay_dao_han
+            + cac_khoan_dau_tu_nam_giu_den_ngay_dao_han_htm
+            as cash_and_marketable_securities,
+
+            tien_va_cac_khoan_tuong_duong_tien
+            + dau_tu_tai_chinh_ngan_han
+            + cac_khoan_phai_thu_ngan_han
+            + gia_tri_thuan_dau_tu_tai_san_tai_chinh_ngan_han
+            + tong_cac_khoan_phai_thu as quick_assets,
 
             trai_phieu_chuyen_doi_dai_han
             + trai_phieu_phat_hanh_dai_han
@@ -428,8 +438,13 @@ with
             + vay_va_no_ngan_han
             + trai_phieu_chuyen_doi_ngan_han
             + trai_phieu_phat_hanh_ngan_han
-            + vay_tai_san_tai_chinh_ngan_han as short_term_debt
+            + vay_tai_san_tai_chinh_ngan_han as short_term_debt,
 
+            long_term_debt + short_term_debt as total_debt,
+
+            cash_and_marketable_securities - total_debt as net_cash,
+
+            coalesce(tong_no_phai_tra, no_phai_tra) as total_liabilities
         from source
     )
 
