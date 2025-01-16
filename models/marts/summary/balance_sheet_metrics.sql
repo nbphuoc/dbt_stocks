@@ -29,7 +29,21 @@ with
             shares_outstanding as b6_shares_outstanding
 
         from fct_bs
+    ),
+
+    renamed as (
+        select
+            fk_stock_id,
+            quarter_start_date,
+            quarter,
+            b1_cash_and_marketable_securities,
+            b2_cash_ratio,
+            b3_current_ratio,
+            b4_quick_ratio,
+            b5_net_cash,
+            b6_shares_outstanding
+        from calculated
     )
 
 select *
-from calculated
+from renamed

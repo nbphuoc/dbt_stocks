@@ -67,7 +67,23 @@ with
             fct_cf as cf
             on bs.fk_stock_id = cf.fk_stock_id
             and bs.quarter_start_date = cf.quarter_start_date
+    ),
+
+    renamed as (
+        select
+            fk_stock_id,
+            quarter_start_date,
+            quarter,
+            l1__total_debt,
+            l2__interest_coverage,
+            l3__liabilities_to_assets,
+            l4__liabilities_to_equity,
+            l5__lt_debt_to_equity,
+            l6__st_debt_to_equity,
+            l7__total_debt_to_equity,
+            l8__debt_change
+        from calculated
     )
 
 select *
-from calculated
+from renamed
