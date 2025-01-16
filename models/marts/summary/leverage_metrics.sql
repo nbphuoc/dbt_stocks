@@ -4,12 +4,15 @@ with
             fk_stock_id,
             quarter,
             quarter_start_date,
-            total_assets,
-            coalesce(total_liabilities, liabilities) as total_liabilities,
-            equity,
+            tong_tai_san as total_assets,
+            total_liabilities,
+            von_chu_so_huu as equity,
             long_term_debt,
             short_term_debt,
-            long_term_debt + short_term_debt as total_debt
+            long_term_debt + short_term_debt as total_debt,
+            lag(long_term_debt + short_term_debt) over (
+                partition by fk_stock_id order by quarter_start_date
+            ) as prev_total_debt
         from {{ ref("fct_bs") }}
     ),
 
@@ -18,7 +21,7 @@ with
             fk_stock_id,
             quarter,
             quarter_start_date,
-            sum(net_profit) over (
+            sum(loi_nhuan_ke_toan_sau_thue) over (
                 partition by fk_stock_id
                 order by quarter_start_date
                 rows between 3 preceding and current row
@@ -30,7 +33,7 @@ with
             fk_stock_id,
             quarter,
             quarter_start_date,
-            sum(depreciation + goodwill_amortization) over (
+            sum(khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai) over (
                 partition by fk_stock_id
                 order by quarter_start_date
                 rows between 3 preceding and current row
@@ -43,13 +46,15 @@ with
             bs.fk_stock_id,
             bs.quarter_start_date,
             bs.quarter,
+            bs.total_debt as l1__total_debt,
             (pnl.l4q_net_profit + cf.l4q_da)
-            / bs.total_liabilities as interest_coverage,
-            bs.total_liabilities / bs.total_assets as liabilities_to_assets,
-            bs.total_liabilities / bs.equity as liabilities_to_equity,
-            bs.long_term_debt / bs.equity as long_term_liabilities_to_equity,
-            bs.short_term_debt / bs.equity as short_term_liabilities_to_equity,
-            bs.total_debt / bs.equity as total_debt_to_equity
+            / bs.total_liabilities as l2__interest_coverage,
+            bs.total_liabilities / bs.total_assets as l3__liabilities_to_assets,
+            bs.total_liabilities / bs.equity as l4__liabilities_to_equity,
+            bs.long_term_debt / bs.equity as l5__lt_debt_to_equity,
+            bs.short_term_debt / bs.equity as l6__st_debt_to_equity,
+            bs.total_debt / bs.equity as l7__total_debt_to_equity,
+            bs.total_debt - bs.prev_total_debt as l8__debt_change
         from fct_bs as bs
         left join
             fct_pnl as pnl

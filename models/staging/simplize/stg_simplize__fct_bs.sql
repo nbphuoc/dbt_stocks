@@ -270,6 +270,8 @@ with
             `quỹ_dự_trữ_bắt_buộc` as quy_du_tru_bat_buoc,
 
             --
+            coalesce(tong_no_phai_tra, no_phai_tra, 0) as total_liabilities,
+
             coalesce(trai_phieu_chuyen_doi, 0)
             + coalesce(trai_phieu_chuyen_doi_dai_han, 0)
             + coalesce(trai_phieu_phat_hanh_dai_han, 0)
