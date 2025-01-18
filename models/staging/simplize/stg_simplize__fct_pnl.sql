@@ -4,15 +4,7 @@ with
     renamed as (
         select
             stock_code as fk_stock_id,
-            quarter as quarter,
-            date_trunc(
-                'QUARTER',
-                make_date(
-                    cast(substring(quarter, 1, 4) as int),
-                    (cast(substring(quarter, 6, 1) as int) - 1) * 3 + 1,
-                    1
-                )
-            )::date as quarter_start_date,
+            quarter as fk_quarter_id,
             coalesce(
                 `doanh_thu_bán_hàng_và_cung_cấp_dịch_vụ`, 0
             ) as doanh_thu_ban_hang_va_cung_cap_dich_vu,
@@ -302,7 +294,7 @@ with
             + loi_nhuan_gop  -- Chung Khoan
             + thu_nhap_lai_thuan  -- Ngan Hang
             + loi_nhuan_gop_hoat_dong_kinh_doanh_bao_hiem  -- Bao Hiem
-            as gross_revenue,
+            as gross_profit,
 
             loi_nhuan_thuan_tu_hoat_dong_kinh_doanh  -- Non-Financial
             + ket_qua_hoat_dong  -- Chung Khoan

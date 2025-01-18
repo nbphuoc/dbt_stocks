@@ -4,15 +4,7 @@ with
     renamed as (
         select
             stock_code as fk_stock_id,
-            quarter as quarter,
-            date_trunc(
-                'QUARTER',
-                make_date(
-                    cast(substring(quarter, 1, 4) as int),
-                    (cast(substring(quarter, 6, 1) as int) - 1) * 3 + 1,
-                    1
-                )
-            )::date as quarter_start_date,
+            quarter as fk_quarter_id,
             coalesce(`tài_sản_ngắn_hạn`, 0) as tai_san_ngan_han,
             coalesce(
                 `tiền_và_các_khoản_tương_đương_tiền`, 0
