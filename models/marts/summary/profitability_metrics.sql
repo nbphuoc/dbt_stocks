@@ -39,6 +39,21 @@ with
         left join {{ ref("dim_quarters") }} as q on p.fk_quarter_id = q.pk_quarter_id
     ),
 
+    bs as (
+        select
+            -- Dimensions
+            fk_stock_id,
+            fk_quarter_id,
+
+            -- Average Measures
+            avg_total_assets_2y,
+            avg_total_equity_2y,
+            avg_total_invested_capital_2y,
+            avg_total_fixed_assets_2y
+
+        from {{ ref("fct_bs") }}
+    ),
+
     avg_growth as (
         select
             fk_stock_id,
@@ -110,13 +125,38 @@ with
         from pnl
     ),
 
+    return_on_and_turnover as (
+        select
+            b.fk_stock_id,
+            b.fk_quarter_id,
+
+            -- Return on
+            try_divide(p.npat_l4q, b.avg_total_assets_2y) as roa,
+            try_divide(p.npat_l4q, b.avg_total_equity_2y) as roe,
+            try_divide(p.npat_l4q, b.avg_total_invested_capital_2y) as roic,
+
+            -- Turnover
+            try_divide(p.net_revenue, b.avg_total_assets_2y) as avg_asset_turnover,
+            try_divide(
+                p.net_revenue, b.avg_total_fixed_assets_2y
+            ) as avg_fixed_asset_turnover,
+            try_divide(p.net_revenue, b.avg_total_equity_2y) as avg_equity_turnover
+
+        from bs as b
+        left join
+            pnl as p
+            on b.fk_stock_id = p.fk_stock_id
+            and b.fk_quarter_id = p.fk_quarter_id
+    ),
+
     merged as (
         select
             a.fk_stock_id,
             a.fk_quarter_id,
             a.* except (fk_stock_id, fk_quarter_id),
             m.* except (fk_stock_id, fk_quarter_id),
-            p.* except (fk_stock_id, fk_quarter_id)
+            p.* except (fk_stock_id, fk_quarter_id),
+            r.* except (fk_stock_id, fk_quarter_id)
         from avg_growth as a
         left join
             margin as m
@@ -126,6 +166,10 @@ with
             pnl as p
             on a.fk_stock_id = p.fk_stock_id
             and a.fk_quarter_id = p.fk_quarter_id
+        left join
+            return_on_and_turnover as r
+            on a.fk_stock_id = r.fk_stock_id
+            and a.fk_quarter_id = r.fk_quarter_id
     ),
 
     renamed as (
@@ -157,8 +201,17 @@ with
             earnings_adjusted as p17__earnings_adjusted,
             earnings_adjusted_l4q as p18__earnings_adjusted_l4q,
             cash_earnings as p19__cash_earnings,
-            cash_earnings_l4q as p20__cash_earnings_l4q
+            cash_earnings_l4q as p20__cash_earnings_l4q,
 
+            -- Return on
+            roa as p21__roa,
+            roe as p22__roe,
+            roic as p23__roic,
+
+            -- Turnover
+            avg_asset_turnover as p24__avg_asset_turnover,
+            avg_fixed_asset_turnover as p25__avg_fixed_asset_turnover,
+            avg_equity_turnover as p26__avg_equity_turnover
         from merged
     )
 

@@ -453,7 +453,15 @@ with
 
             cash_and_marketable_securities - total_debt as net_cash,
 
-            tong_no_phai_tra + no_phai_tra as total_liabilities
+            tong_no_phai_tra + no_phai_tra as total_liabilities,
+            tong_tai_san as total_assets,
+            von_chu_so_huu as total_equity,
+            total_equity + total_debt as total_invested_capital,
+            case
+                when tai_san_dai_han > 0
+                then tai_san_dai_han
+                else gop_von_dau_tu_dai_han + tai_san_co_dinh + bat_dong_san_dau_tu
+            end as total_fixed_assets
         from source
     )
 
