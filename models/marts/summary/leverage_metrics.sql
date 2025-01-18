@@ -15,36 +15,19 @@ with
         from {{ ref("fct_bs") }}
     ),
 
-    fct_pnl as (
-        select
-            fk_stock_id,
-            fk_quarter_id,
-            sum(loi_nhuan_ke_toan_sau_thue) over (
-                partition by fk_stock_id
-                order by fk_quarter_id
-                rows between 3 preceding and current row
-            ) as l4q_net_profit
-        from {{ ref("fct_pnl") }}
-    ),
-    fct_cf as (
-        select
-            fk_stock_id,
-            fk_quarter_id,
-            sum(khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai) over (
-                partition by fk_stock_id
-                order by fk_quarter_id
-                rows between 3 preceding and current row
-            ) as l4q_da
-        from {{ ref("fct_cf") }}
-    ),
+    fct_pnl as (select fk_stock_id, fk_quarter_id, l4q_npat from {{ ref("fct_pnl") }}),
+    fct_cf as (select fk_stock_id, fk_quarter_id, l4q_da from {{ ref("fct_cf") }}),
 
     calculated as (
         select
             bs.fk_stock_id,
             bs.fk_quarter_id,
             bs.total_debt as l1__total_debt,
+            pnl.l4q_npat,
+            cf.l4q_da,
+            bs.total_liabilities,
             try_divide(
-                (pnl.l4q_net_profit + cf.l4q_da), bs.total_liabilities
+                (pnl.l4q_npat + cf.l4q_da), bs.total_liabilities
             ) as l2__interest_coverage,
             try_divide(
                 bs.total_liabilities, bs.total_assets
@@ -82,3 +65,4 @@ with
 
 select *
 from renamed
+order by fk_stock_id, fk_quarter_id

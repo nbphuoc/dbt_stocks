@@ -305,7 +305,45 @@ with
             - doanh_thu_tai_chinh  -- Bao Hiem
             as ebit
         from source
+    ),
+
+    rolling as (
+        select
+            fk_stock_id,
+            fk_quarter_id,
+
+            -- Rolling 4 Quarters
+            sum(net_revenue) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as l4q_net_revenue,
+            sum(gross_profit) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as l4q_gross_profit,
+            sum(ebit) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as l4q_ebit,
+            sum(loi_nhuan_ke_toan_sau_thue) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as l4q_npat
+        from renamed
+    ),
+
+    joined as (
+        select rn.*, rl.* except (fk_stock_id, fk_quarter_id)
+        from renamed as rn
+        left join
+            rolling as rl
+            on rn.fk_stock_id = rl.fk_stock_id
+            and rn.fk_quarter_id = rl.fk_quarter_id
     )
 
 select *
-from renamed
+from joined

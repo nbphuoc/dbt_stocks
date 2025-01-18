@@ -317,10 +317,32 @@ with
             ) as tang_giam_phai_tra_ve_loi_giao_dich_cac_tai_san_tai_chinh,
             coalesce(
                 `tăng/giảm_phải_trả_phải_nộp_khác`, 0
-            ) as tang_giam_phai_tra_phai_nop_khac
+            ) as tang_giam_phai_tra_phai_nop_khac,
+            khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai as da
 
         from source
+    ),
+
+    rolling as (
+        select
+            fk_stock_id,
+            fk_quarter_id,
+            sum(da) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as l4q_da
+        from renamed
+    ),
+
+    joined as (
+        select rn.*, rl.* except (fk_stock_id, fk_quarter_id)
+        from renamed as rn
+        left join
+            rolling as rl
+            on rn.fk_stock_id = rl.fk_stock_id
+            and rn.fk_quarter_id = rl.fk_quarter_id
     )
 
 select *
-from renamed
+from joined
