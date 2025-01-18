@@ -13,11 +13,15 @@ with
             p.ebit,
             p.ebitda,
             p.npat,
+            p.earnings_adjusted,
+            p.cash_earnings,
             p.net_revenue_l4q,
             p.gross_profit_l4q,
             p.ebit_l4q,
             p.ebitda_l4q,
             p.npat_l4q,
+            p.earnings_adjusted_l4q,
+            p.cash_earnings_l4q,
 
             -- Last Quarter Growth
             p.net_revenue_growth_yoy,
@@ -111,12 +115,17 @@ with
             a.fk_stock_id,
             a.fk_quarter_id,
             a.* except (fk_stock_id, fk_quarter_id),
-            m.* except (fk_stock_id, fk_quarter_id)
+            m.* except (fk_stock_id, fk_quarter_id),
+            p.* except (fk_stock_id, fk_quarter_id)
         from avg_growth as a
         left join
             margin as m
             on a.fk_stock_id = m.fk_stock_id
             and a.fk_quarter_id = m.fk_quarter_id
+        left join
+            pnl as p
+            on a.fk_stock_id = p.fk_stock_id
+            and a.fk_quarter_id = p.fk_quarter_id
     ),
 
     renamed as (
@@ -142,7 +151,13 @@ with
             npat_margin as p13__npat_margin,
             npat_margin_l4q as p14__npat_margin_l4q,
             ebitda_margin as p15__ebitda_margin,
-            ebitda_margin_l4q as p16__ebitda_margin_l4q
+            ebitda_margin_l4q as p16__ebitda_margin_l4q,
+
+            -- Adjusted Earnings
+            earnings_adjusted as p17__earnings_adjusted,
+            earnings_adjusted_l4q as p18__earnings_adjusted_l4q,
+            cash_earnings as p19__cash_earnings,
+            cash_earnings_l4q as p20__cash_earnings_l4q
 
         from merged
     )

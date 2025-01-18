@@ -12,7 +12,9 @@ with
             pnl.fk_quarter_id,
             pnl.* except (fk_stock_id, fk_quarter_id),
             pnl.ebit + cf.da as ebitda,
-            pnl.ebit_l4q + cf.da_l4q as ebitda_l4q
+            pnl.ebit_l4q + cf.da_l4q as ebitda_l4q,
+            pnl.earnings_adjusted + cf.da as cash_earnings,
+            pnl.earnings_adjusted_l4q + cf.da_l4q as cash_earnings_l4q
         from pnl
         left join
             cf

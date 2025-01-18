@@ -305,7 +305,9 @@ with
             - doanh_thu_tai_chinh  -- Bao Hiem
             as ebit,
 
-            loi_nhuan_ke_toan_sau_thue as npat
+            loi_nhuan_ke_toan_sau_thue as npat,
+            0 as bonus_fund_expense,
+            npat + bonus_fund_expense as earnings_adjusted
         from source
     ),
 
@@ -334,7 +336,12 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as npat_l4q
+            ) as npat_l4q,
+            sum(earnings_adjusted) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as earnings_adjusted_l4q
         from renamed
     ),
 
