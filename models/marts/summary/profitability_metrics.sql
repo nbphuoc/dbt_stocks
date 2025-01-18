@@ -15,6 +15,7 @@ with
             p.npat,
             p.earnings_adjusted,
             p.cash_earnings,
+            p.interest_expense,
             p.net_revenue_l4q,
             p.gross_profit_l4q,
             p.ebit_l4q,
@@ -22,6 +23,7 @@ with
             p.npat_l4q,
             p.earnings_adjusted_l4q,
             p.cash_earnings_l4q,
+            p.interest_expense_l4q,
 
             -- Last Quarter Growth
             p.net_revenue_growth_yoy,
@@ -49,7 +51,8 @@ with
             avg_total_assets_2y,
             avg_total_equity_2y,
             avg_total_invested_capital_2y,
-            avg_total_fixed_assets_2y
+            avg_total_fixed_assets_2y,
+            avg_total_debt_l4q
 
         from {{ ref("fct_bs") }}
     ),
@@ -125,7 +128,7 @@ with
         from pnl
     ),
 
-    return_on_and_turnover as (
+    returnon_turnover_and_interest_rate as (
         select
             b.fk_stock_id,
             b.fk_quarter_id,
@@ -140,7 +143,12 @@ with
             try_divide(
                 p.net_revenue, b.avg_total_fixed_assets_2y
             ) as avg_fixed_asset_turnover,
-            try_divide(p.net_revenue, b.avg_total_equity_2y) as avg_equity_turnover
+            try_divide(p.net_revenue, b.avg_total_equity_2y) as avg_equity_turnover,
+
+            -- Interest Rate
+            try_divide(
+                p.interest_expense_l4q, b.avg_total_debt_l4q
+            ) as effective_interest_rate
 
         from bs as b
         left join
@@ -167,7 +175,7 @@ with
             on a.fk_stock_id = p.fk_stock_id
             and a.fk_quarter_id = p.fk_quarter_id
         left join
-            return_on_and_turnover as r
+            returnon_turnover_and_interest_rate as r
             on a.fk_stock_id = r.fk_stock_id
             and a.fk_quarter_id = r.fk_quarter_id
     ),
@@ -211,7 +219,10 @@ with
             -- Turnover
             avg_asset_turnover as p24__avg_asset_turnover,
             avg_fixed_asset_turnover as p25__avg_fixed_asset_turnover,
-            avg_equity_turnover as p26__avg_equity_turnover
+            avg_equity_turnover as p26__avg_equity_turnover,
+
+            -- Interest Rate
+            effective_interest_rate as p27__effective_interest_rate
         from merged
     )
 

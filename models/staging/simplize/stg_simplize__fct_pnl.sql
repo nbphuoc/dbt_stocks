@@ -307,7 +307,8 @@ with
 
             loi_nhuan_ke_toan_sau_thue as npat,
             0 as bonus_fund_expense,
-            npat + bonus_fund_expense as earnings_adjusted
+            npat + bonus_fund_expense as earnings_adjusted,
+            chi_phi_lai_vay as interest_expense
         from source
     ),
 
@@ -341,7 +342,12 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as earnings_adjusted_l4q
+            ) as earnings_adjusted_l4q,
+            sum(interest_expense) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as interest_expense_l4q
         from renamed
     ),
 

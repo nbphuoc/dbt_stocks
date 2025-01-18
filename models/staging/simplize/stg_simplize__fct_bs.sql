@@ -463,7 +463,33 @@ with
                 else gop_von_dau_tu_dai_han + tai_san_co_dinh + bat_dong_san_dau_tu
             end as total_fixed_assets
         from source
+    ),
+
+    rolling as (
+        select
+            fk_stock_id,
+            fk_quarter_id,
+
+            avg(total_debt) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as avg_total_debt_l4q
+        from renamed
+    ),
+
+    joined as (
+        select
+            rn.fk_stock_id,
+            rn.fk_quarter_id,
+            rn.* except (fk_stock_id, fk_quarter_id),
+            rl.* except (fk_stock_id, fk_quarter_id)
+        from renamed as rn
+        left join
+            rolling as rl
+            on rn.fk_stock_id = rl.fk_stock_id
+            and rn.fk_quarter_id = rl.fk_quarter_id
     )
 
 select *
-from renamed
+from joined
