@@ -4,7 +4,8 @@ with
     renamed as (
         select
             stock_code as fk_stock_id,
-            date as date,
+            date_format(date, 'yyyyMMdd')::int as fk_date_id,
+            concat(year(date)::string, 'Q', quarter(date)::string) as fk_quarter_id,
             close_price,
             trading_volume,
             market_cap,

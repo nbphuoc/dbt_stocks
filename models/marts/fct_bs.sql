@@ -1,5 +1,5 @@
 {%- set surrogate_key_sql = dbt_utils.generate_surrogate_key(
-    ["quarter", "fk_stock_id"]
+    ["fk_quarter_id", "fk_stock_id"]
 ) %}
 with
     fct_bs as (select * from {{ ref("stg_simplize__fct_bs") }}),

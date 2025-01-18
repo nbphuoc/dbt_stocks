@@ -2,8 +2,7 @@ with
     fct_bs as (
         select
             fk_stock_id,
-            quarter,
-            quarter_start_date,
+            fk_quarter_id,
             cash_and_marketable_securities,
             net_cash,
             quick_assets,
@@ -17,8 +16,7 @@ with
     calculated as (
         select
             fk_stock_id,
-            quarter_start_date,
-            quarter,
+            fk_quarter_id,
             cash_and_marketable_securities as b1_cash_and_marketable_securities,
             try_divide(
                 cash_and_marketable_securities, current_liabilities
@@ -34,8 +32,7 @@ with
     renamed as (
         select
             fk_stock_id,
-            quarter_start_date,
-            quarter,
+            fk_quarter_id,
             b1_cash_and_marketable_securities,
             b2_cash_ratio,
             b3_current_ratio,

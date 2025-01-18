@@ -2,8 +2,7 @@ with
     fct_bs as (
         select
             fk_stock_id,
-            quarter,
-            quarter_start_date,
+            fk_quarter_id,
             tong_tai_san as total_assets,
             total_liabilities,
             von_chu_so_huu as equity,
@@ -11,7 +10,7 @@ with
             short_term_debt,
             long_term_debt + short_term_debt as total_debt,
             lag(long_term_debt + short_term_debt) over (
-                partition by fk_stock_id order by quarter_start_date
+                partition by fk_stock_id order by fk_quarter_id
             ) as prev_total_debt
         from {{ ref("fct_bs") }}
     ),
@@ -19,11 +18,10 @@ with
     fct_pnl as (
         select
             fk_stock_id,
-            quarter,
-            quarter_start_date,
+            fk_quarter_id,
             sum(loi_nhuan_ke_toan_sau_thue) over (
                 partition by fk_stock_id
-                order by quarter_start_date
+                order by fk_quarter_id
                 rows between 3 preceding and current row
             ) as l4q_net_profit
         from {{ ref("fct_pnl") }}
@@ -31,11 +29,10 @@ with
     fct_cf as (
         select
             fk_stock_id,
-            quarter,
-            quarter_start_date,
+            fk_quarter_id,
             sum(khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai) over (
                 partition by fk_stock_id
-                order by quarter_start_date
+                order by fk_quarter_id
                 rows between 3 preceding and current row
             ) as l4q_da
         from {{ ref("fct_cf") }}
@@ -44,8 +41,7 @@ with
     calculated as (
         select
             bs.fk_stock_id,
-            bs.quarter_start_date,
-            bs.quarter,
+            bs.fk_quarter_id,
             bs.total_debt as l1__total_debt,
             try_divide(
                 (pnl.l4q_net_profit + cf.l4q_da), bs.total_liabilities
@@ -62,18 +58,17 @@ with
         left join
             fct_pnl as pnl
             on bs.fk_stock_id = pnl.fk_stock_id
-            and bs.quarter_start_date = pnl.quarter_start_date
+            and bs.fk_quarter_id = pnl.fk_quarter_id
         left join
             fct_cf as cf
             on bs.fk_stock_id = cf.fk_stock_id
-            and bs.quarter_start_date = cf.quarter_start_date
+            and bs.fk_quarter_id = cf.fk_quarter_id
     ),
 
     renamed as (
         select
             fk_stock_id,
-            quarter_start_date,
-            quarter,
+            fk_quarter_id,
             l1__total_debt,
             l2__interest_coverage,
             l3__liabilities_to_assets,

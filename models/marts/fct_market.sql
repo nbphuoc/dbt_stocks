@@ -1,4 +1,6 @@
-{%- set surrogate_key_sql = dbt_utils.generate_surrogate_key(["date", "fk_stock_id"]) %}
+{%- set surrogate_key_sql = dbt_utils.generate_surrogate_key(
+    ["fk_date_id", "fk_stock_id"]
+) %}
 with
     fct_pnl as (select * from {{ ref("stg_simplize__fct_market") }}),
 
