@@ -303,7 +303,9 @@ with
             - chi_phi_tai_chinh  -- Non-Financial, Chung Khoan, Bao Hiem
             - doanh_thu_hoat_dong_tai_chinh  -- Non-Financial, Chung Khoan
             - doanh_thu_tai_chinh  -- Bao Hiem
-            as ebit
+            as ebit,
+
+            loi_nhuan_ke_toan_sau_thue as npat
         from source
     ),
 
@@ -328,7 +330,7 @@ with
                 order by fk_quarter_id
                 rows between 3 preceding and current row
             ) as l4q_ebit,
-            sum(loi_nhuan_ke_toan_sau_thue) over (
+            sum(npat) over (
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
