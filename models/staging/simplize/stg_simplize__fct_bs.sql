@@ -457,11 +457,43 @@ with
             tong_tai_san as total_assets,
             von_chu_so_huu as total_equity,
             total_equity + total_debt as total_invested_capital,
+
             case
                 when tai_san_dai_han > 0
                 then tai_san_dai_han
                 else gop_von_dau_tu_dai_han + tai_san_co_dinh + bat_dong_san_dau_tu
-            end as total_fixed_assets
+            end as total_fixed_assets,
+
+            cac_khoan_phai_thu_ngan_han  -- Non-Financial, Bao Hiem
+            + tong_cac_khoan_phai_thu  -- Chung Khoan
+            as short_term_accounts_receivable,
+
+            phai_thu_dai_han_cua_khach_hang  -- Non-Financial, Chung Khoan, Bao Hiem
+            + tra_truoc_cho_nguoi_ban_dai_han  -- Non-Financial, Chung Khoan, Bao Hiem
+            as long_term_accounts_receivable,
+
+            short_term_accounts_receivable
+            + long_term_accounts_receivable as total_accounts_receivable,
+
+            hang_ton_kho_rong  -- Non-Financial, Chung Khoan, Bao Hiem
+            as inventory,
+
+            phai_tra_nguoi_ban_ngan_han  -- Non-Financial, Chung Khoan
+            + phai_tra_thuong_mai  -- Bao Hiem
+            + nguoi_mua_tra_tien_truoc_ngan_han  -- Non-Financial, Chung Khoan, Bao Hiem
+            as short_term_accounts_payable,
+
+            phai_tra_nha_cung_cap_dai_han  -- Non-Financial, Chung Khoan, Bao Hiem
+            + nguoi_mua_tra_tien_truoc_dai_han  -- Non-Financial, Chung Khoan, Bao Hiem
+            as long_term_accounts_payable,
+
+            short_term_accounts_payable
+            + long_term_accounts_payable as total_accounts_payable,
+
+            total_accounts_payable
+            + inventory
+            - total_accounts_receivable as net_working_capital_amount
+
         from source
     ),
 
@@ -474,7 +506,26 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as avg_total_debt_l4q
+            ) as avg_total_debt_l4q,
+
+            avg(total_accounts_receivable) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as avg_total_accounts_receivable_l4q,
+
+            avg(inventory) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as avg_inventory_l4q,
+
+            avg(total_accounts_payable) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as avg_total_accounts_payable_l4q
+
         from renamed
     ),
 

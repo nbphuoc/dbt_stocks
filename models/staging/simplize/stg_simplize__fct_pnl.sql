@@ -308,7 +308,15 @@ with
             loi_nhuan_ke_toan_sau_thue as npat,
             0 as bonus_fund_expense,
             npat + bonus_fund_expense as earnings_adjusted,
-            chi_phi_lai_vay as interest_expense
+            chi_phi_lai_vay as interest_expense,
+
+            case
+                when gia_von_hang_ban != 0
+                then gia_von_hang_ban  -- Non-Financial
+                when chi_phi_hoat_dong_kinh_doanh != 0
+                then chi_phi_hoat_dong_kinh_doanh  -- Chung Khoan
+                else 0
+            end as cost_of_goods_sold
         from source
     ),
 
@@ -347,7 +355,12 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as interest_expense_l4q
+            ) as interest_expense_l4q,
+            sum(cost_of_goods_sold) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as cost_of_goods_sold_l4q
         from renamed
     ),
 

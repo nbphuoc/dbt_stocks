@@ -37,7 +37,16 @@ with
         left join quarters as q on b.fk_quarter_id = q.pk_quarter_id
     ),
 
-    renamed as (select {{ surrogate_key_sql }} as pk_fct_bs_id, * from average)
+    prev_quarter as (
+        select
+            *,
+            lag(net_working_capital_amount) over (
+                partition by fk_stock_id order by fk_quarter_id
+            ) as net_working_capital_amount_prev_quarter
+        from average
+    ),
+
+    renamed as (select {{ surrogate_key_sql }} as pk_fct_bs_id, * from prev_quarter)
 
 select *
 from renamed
