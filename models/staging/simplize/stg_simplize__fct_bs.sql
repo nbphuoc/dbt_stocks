@@ -407,36 +407,53 @@ with
             coalesce(`quỹ_dự_trữ_bắt_buộc`, 0) as quy_du_tru_bat_buoc,
             coalesce(`vốn_điều_lệ`, 0) as von_dieu_le,
             --
-            tien_va_cac_khoan_tuong_duong_tien
-            + dau_tu_nam_giu_den_ngay_dao_han
-            + chung_khoan_dau_tu_nam_giu_den_ngay_dao_han
-            + cac_khoan_dau_tu_nam_giu_den_ngay_dao_han_htm
+            tien_va_cac_khoan_tuong_duong_tien  -- Non-Financial, Bao Hiem, Chung Khoan
+            + tien_mat_vang_bac_da_quy  -- Ngan Hang
+            + tien_gui_tai_ngan_hang_nha_nuoc  -- Ngan Hang
+            + tien_vang_gui_tai_cac_to_chuc_tin_dung_khac_va_cho_vay_cac_to_chuc_tin_dung_khac  -- Ngan Hang
+            + dau_tu_nam_giu_den_ngay_dao_han  -- Non-Financial, Bao Hiem
+            + cac_khoan_dau_tu_nam_giu_den_ngay_dao_han_htm  -- Chung Khoan
+            + chung_khoan_dau_tu_nam_giu_den_ngay_dao_han  -- Ngan Hang
             as cash_and_marketable_securities,
 
-            tien_va_cac_khoan_tuong_duong_tien
-            + dau_tu_tai_chinh_ngan_han
-            + cac_khoan_phai_thu_ngan_han
-            + gia_tri_thuan_dau_tu_tai_san_tai_chinh_ngan_han
-            + tong_cac_khoan_phai_thu as quick_assets,
+            tien_va_cac_khoan_tuong_duong_tien  -- Non-Financial, Bao Hiem, Chung Khoan
+            + tien_mat_vang_bac_da_quy  -- Ngan Hang
+            + tien_gui_tai_ngan_hang_nha_nuoc  -- Ngan Hang
+            + tien_vang_gui_tai_cac_to_chuc_tin_dung_khac_va_cho_vay_cac_to_chuc_tin_dung_khac  -- Ngan Hang
+            + dau_tu_tai_chinh_ngan_han  -- Non-Financial, Bao Hiem
+            + cac_khoan_phai_thu_ngan_han  -- Non-Financial, Bao Hiem
+            + gia_tri_thuan_dau_tu_tai_san_tai_chinh_ngan_han  -- Chung Khoan
+            + tong_cac_khoan_phai_thu  -- Chung Khoan
+            as quick_assets,
 
-            trai_phieu_chuyen_doi_dai_han
-            + trai_phieu_phat_hanh_dai_han
-            + co_phieu_uu_dai
-            + co_phieu_uu_dai_no
-            + vay_va_no_thue_tai_chinh_dai_han
-            + vay_tai_san_tai_chinh_dai_han as long_term_debt,
+            vay_va_no_thue_tai_chinh_dai_han  -- Non-Financial, Chung Khoan, Bao Hiem
+            + trai_phieu_chuyen_doi  -- Non-Financial, Bao Hiem
+            + co_phieu_uu_dai_no  -- Non-Financial, Chung Khoan, Bao Hiem
+            + co_phieu_uu_dai  -- Non-Financial, Chung Khoan, Bao Hiem
+            + vay_tai_san_tai_chinh_dai_han  -- Chung Khoan
+            + trai_phieu_chuyen_doi_dai_han  -- Chung Khoan
+            + trai_phieu_phat_hanh_dai_han  -- Chung Khoan
+            as long_term_debt,
 
-            vay_va_no_thue_tai_chinh_ngan_han
-            + vay_va_no_ngan_han
-            + trai_phieu_chuyen_doi_ngan_han
-            + trai_phieu_phat_hanh_ngan_han
-            + vay_tai_san_tai_chinh_ngan_han as short_term_debt,
+            vay_va_no_thue_tai_chinh_ngan_han  -- Non-Financial, Chung Khoan
+            + vay_va_no_ngan_han  -- Bao Hiem
+            + vay_tai_san_tai_chinh_ngan_han  -- Chung Khoan
+            + trai_phieu_chuyen_doi_ngan_han  -- Chung Khoan
+            + trai_phieu_phat_hanh_ngan_han  -- Chung Khoan
+            + vay_quy_ho_tro_thanh_toan  -- Chung Khoan
+            as short_term_debt,
 
-            long_term_debt + short_term_debt as total_debt,
+            long_term_debt
+            + short_term_debt
+            + cac_khoan_no_chinh_phu_va_ngan_hang_nha_nuoc  -- Ngan Hang
+            + tien_gui_va_vay_cac_to_chuc_tin_dung_khac  -- Ngan Hang
+            + cac_cong_cu_tai_chinh_phai_sinh_va_cac_khoan_no_tai_chinh_khac  -- Ngan Hang
+            + phat_hanh_giay_to_co_gia  -- Ngan Hang
+            as total_debt,
 
             cash_and_marketable_securities - total_debt as net_cash,
 
-            coalesce(tong_no_phai_tra, no_phai_tra) as total_liabilities
+            tong_no_phai_tra + no_phai_tra as total_liabilities
         from source
     )
 
