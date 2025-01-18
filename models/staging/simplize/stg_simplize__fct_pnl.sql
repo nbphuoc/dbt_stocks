@@ -290,8 +290,28 @@ with
                 `lợi_nhuận_thuần_hoạt_động_ngân_hàng`, 0
             ) as loi_nhuan_thuan_hoat_dong_ngan_hang,
             coalesce(`lợi_nhuận_hoạt_động_khác`, 0) as loi_nhuan_hoat_dong_khac,
-            coalesce(`thu_nhập_khác_ròng`, 0) as thu_nhap_khac_rong
+            coalesce(`thu_nhập_khác_ròng`, 0) as thu_nhap_khac_rong,
+            --
+            doanh_thu_thuan_ve_ban_hang_va_cung_cap_dich_vu  -- Non-Financial
+            + doanh_thu_thuan  -- Chung Khoan
+            + thu_nhap_lai_thuan  -- Ngan Hang
+            + doanh_thu_thuan_hoat_dong_kinh_doanh_bao_hiem  -- Bao Hiem
+            as net_revenue,
 
+            loi_nhuan_gop_ve_ban_hang_va_cung_cap_dich_vu  -- Non-Financial
+            + loi_nhuan_gop  -- Chung Khoan
+            + thu_nhap_lai_thuan  -- Ngan Hang
+            + loi_nhuan_gop_hoat_dong_kinh_doanh_bao_hiem  -- Bao Hiem
+            as gross_revenue,
+
+            loi_nhuan_thuan_tu_hoat_dong_kinh_doanh  -- Non-Financial
+            + ket_qua_hoat_dong  -- Chung Khoan
+            + loi_nhuan_thuan_tu_hoat_dong_kinh_doanh_truoc_chi_phi_du_phong_rui_ro_tin_dung  -- Ngan Hang
+            + loi_nhuan_thuan_tu_hoat_dong_kinh_doanh_bao_hiem  -- Bao Hiem
+            - chi_phi_tai_chinh  -- Non-Financial, Chung Khoan, Bao Hiem
+            - doanh_thu_hoat_dong_tai_chinh  -- Non-Financial, Chung Khoan
+            - doanh_thu_tai_chinh  -- Bao Hiem
+            as ebit
         from source
     )
 
