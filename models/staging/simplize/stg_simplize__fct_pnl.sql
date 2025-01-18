@@ -319,22 +319,22 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as l4q_net_revenue,
+            ) as net_revenue_l4q,
             sum(gross_profit) over (
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as l4q_gross_profit,
+            ) as gross_profit_l4q,
             sum(ebit) over (
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as l4q_ebit,
+            ) as ebit_l4q,
             sum(npat) over (
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as l4q_npat
+            ) as npat_l4q
         from renamed
     ),
 

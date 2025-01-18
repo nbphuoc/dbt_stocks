@@ -331,7 +331,7 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as l4q_da
+            ) as da_l4q
         from renamed
     ),
 

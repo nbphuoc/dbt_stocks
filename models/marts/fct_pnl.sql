@@ -4,7 +4,7 @@
 with
     pnl as (select * from {{ ref("stg_simplize__fct_pnl") }}),
 
-    cf as (select fk_stock_id, fk_quarter_id, da, l4q_da from {{ ref("fct_cf") }}),
+    cf as (select fk_stock_id, fk_quarter_id, da, da_l4q from {{ ref("fct_cf") }}),
 
     joined as (
         select
@@ -12,7 +12,7 @@ with
             pnl.fk_quarter_id,
             pnl.* except (fk_stock_id, fk_quarter_id),
             pnl.ebit + cf.da as ebitda,
-            pnl.l4q_ebit + cf.l4q_da as l4q_ebitda
+            pnl.ebit_l4q + cf.da_l4q as ebitda_l4q
         from pnl
         left join
             cf
@@ -39,18 +39,18 @@ with
             ) as npat_prev_year,
 
             -- Last 4 quarters
-            lag(l4q_net_revenue, 4) over (
+            lag(net_revenue_l4q, 4) over (
                 partition by fk_stock_id order by fk_quarter_id
-            ) as l4q_net_revenue_prev_year,
-            lag(l4q_ebit, 4) over (
+            ) as net_revenue_l4q_prev_year,
+            lag(ebit_l4q, 4) over (
                 partition by fk_stock_id order by fk_quarter_id
-            ) as l4q_ebit_prev_year,
-            lag(l4q_ebitda, 4) over (
+            ) as ebit_l4q_prev_year,
+            lag(ebitda_l4q, 4) over (
                 partition by fk_stock_id order by fk_quarter_id
-            ) as l4q_ebitda_prev_year,
-            lag(l4q_npat, 4) over (
+            ) as ebitda_l4q_prev_year,
+            lag(npat_l4q, 4) over (
                 partition by fk_stock_id order by fk_quarter_id
-            ) as l4q_npat_prev_year
+            ) as npat_l4q_prev_year
         from joined
     ),
 
@@ -75,25 +75,25 @@ with
             end as npat_growth_yoy,
 
             case
-                when l4q_net_revenue_prev_year < 0
+                when net_revenue_l4q_prev_year < 0
                 then 0
-                else try_divide(l4q_net_revenue, l4q_net_revenue_prev_year) - 1
-            end as l4q_net_revenue_growth_yoy,
+                else try_divide(net_revenue_l4q, net_revenue_l4q_prev_year) - 1
+            end as net_revenue_l4q_growth_yoy,
             case
-                when l4q_ebit_prev_year < 0
+                when ebit_l4q_prev_year < 0
                 then 0
-                else try_divide(l4q_ebit, l4q_ebit_prev_year) - 1
-            end as l4q_ebit_growth_yoy,
+                else try_divide(ebit_l4q, ebit_l4q_prev_year) - 1
+            end as ebit_l4q_growth_yoy,
             case
-                when l4q_ebitda_prev_year < 0
+                when ebitda_l4q_prev_year < 0
                 then 0
-                else try_divide(l4q_ebitda, l4q_ebitda_prev_year) - 1
-            end as l4q_ebitda_growth_yoy,
+                else try_divide(ebitda_l4q, ebitda_l4q_prev_year) - 1
+            end as ebitda_l4q_growth_yoy,
             case
-                when l4q_npat_prev_year < 0
+                when npat_l4q_prev_year < 0
                 then 0
-                else try_divide(l4q_npat, l4q_npat_prev_year) - 1
-            end as l4q_npat_growth_yoy
+                else try_divide(npat_l4q, npat_l4q_prev_year) - 1
+            end as npat_l4q_growth_yoy
 
         from prev_year
     ),

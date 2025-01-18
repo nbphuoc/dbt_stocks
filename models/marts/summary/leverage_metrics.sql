@@ -15,19 +15,19 @@ with
         from {{ ref("fct_bs") }}
     ),
 
-    fct_pnl as (select fk_stock_id, fk_quarter_id, l4q_npat from {{ ref("fct_pnl") }}),
-    fct_cf as (select fk_stock_id, fk_quarter_id, l4q_da from {{ ref("fct_cf") }}),
+    fct_pnl as (select fk_stock_id, fk_quarter_id, npat_l4q from {{ ref("fct_pnl") }}),
+    fct_cf as (select fk_stock_id, fk_quarter_id, da_l4q from {{ ref("fct_cf") }}),
 
     calculated as (
         select
             bs.fk_stock_id,
             bs.fk_quarter_id,
             bs.total_debt as l1__total_debt,
-            pnl.l4q_npat,
-            cf.l4q_da,
+            pnl.npat_l4q,
+            cf.da_l4q,
             bs.total_liabilities,
             try_divide(
-                (pnl.l4q_npat + cf.l4q_da), bs.total_liabilities
+                (pnl.npat_l4q + cf.da_l4q), bs.total_liabilities
             ) as l2__interest_coverage,
             try_divide(
                 bs.total_liabilities, bs.total_assets
