@@ -360,7 +360,37 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as cost_of_goods_sold_l4q
+            ) as cost_of_goods_sold_l4q,
+
+            -- Last 16 Quarters
+            sum(npat) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as npat_l16q,
+            npat_l16q / 4 as avg_npat_l4q_4y,
+
+            sum(net_revenue) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as net_revenue_l16q,
+            net_revenue_l16q / 4 as avg_net_revenue_l4q_4y,
+
+            sum(earnings_adjusted) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as earnings_adjusted_l16q,
+            earnings_adjusted_l16q / 4 as avg_earnings_adjusted_l4q_4y,
+
+            sum(ebit) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as ebit_l16q,
+            ebit_l16q / 4 as avg_ebit_l4q_4y
+
         from renamed
     ),
 

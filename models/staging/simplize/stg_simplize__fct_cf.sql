@@ -327,11 +327,21 @@ with
         select
             fk_stock_id,
             fk_quarter_id,
+
+            -- Last 4 Quarters
             sum(da) over (
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as da_l4q
+            ) as da_l4q,
+
+            -- Last 16 Quarters
+            sum(da) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as da_l16q,
+            da_l16q / 4 as avg_da_l4q_4y
         from renamed
     ),
 

@@ -8,8 +8,8 @@ with
             quick_assets,
             no_ngan_han as current_assets,
             tai_san_ngan_han as current_liabilities,
-            total_debt,
-            von_gop_cua_chu_so_huu / 10000 as shares_outstanding
+            shares_outstanding,
+            total_debt
         from {{ ref("fct_bs") }}
     ),
 

@@ -407,6 +407,7 @@ with
             coalesce(`quỹ_dự_trữ_bắt_buộc`, 0) as quy_du_tru_bat_buoc,
             coalesce(`vốn_điều_lệ`, 0) as von_dieu_le,
             --
+            von_gop_cua_chu_so_huu / 10000 as shares_outstanding,
             tien_va_cac_khoan_tuong_duong_tien  -- Non-Financial, Bao Hiem, Chung Khoan
             + tien_mat_vang_bac_da_quy  -- Ngan Hang
             + tien_gui_tai_ngan_hang_nha_nuoc  -- Ngan Hang
@@ -524,7 +525,13 @@ with
                 partition by fk_stock_id
                 order by fk_quarter_id
                 rows between 3 preceding and current row
-            ) as avg_total_accounts_payable_l4q
+            ) as avg_total_accounts_payable_l4q,
+
+            avg(total_equity) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as avg_total_equity_l4q
 
         from renamed
     ),

@@ -2,3 +2,6 @@ dbt-env/
 target/
 dbt_packages/
 logs/
+
+scratch/**
+!scratch/.gitkeep
