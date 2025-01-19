@@ -318,7 +318,14 @@ with
             coalesce(
                 `tăng/giảm_phải_trả_phải_nộp_khác`, 0
             ) as tang_giam_phai_tra_phai_nop_khac,
-            khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai as da
+
+            --
+            khau_hao_tai_san_co_dinh + phan_bo_loi_the_thuong_mai as da,
+            co_tuc_loi_nhuan_da_tra_cho_chu_so_huu as dividend_paid,
+            tien_chi_mua_sam_xay_dung_tai_san_co_dinh_va_cac_tai_san_dai_han_khac
+            +
+            tien_thu_tu_thanh_ly_nhuong_ban_tai_san_co_dinh_va_cac_tai_san_dai_han_khac
+            as capex
 
         from source
     ),
@@ -334,6 +341,16 @@ with
                 order by fk_quarter_id
                 rows between 3 preceding and current row
             ) as da_l4q,
+            sum(dividend_paid) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as dividend_paid_l4q,
+            sum(capex) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 3 preceding and current row
+            ) as capex_l4q,
 
             -- Last 16 Quarters
             sum(da) over (
@@ -341,7 +358,14 @@ with
                 order by fk_quarter_id
                 rows between 15 preceding and current row
             ) as da_l16q,
-            da_l16q / 4 as avg_da_l4q_4y
+            da_l16q / 4 as avg_da_l4q_4y,
+
+            sum(dividend_paid) over (
+                partition by fk_stock_id
+                order by fk_quarter_id
+                rows between 15 preceding and current row
+            ) as dividend_paid_l16q,
+            dividend_paid_l16q / 4 as avg_dividend_paid_l4q_4y
         from renamed
     ),
 
