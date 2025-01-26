@@ -110,5 +110,3 @@ with
 
 select *
 from renamed
-
-where fk_stock_id = 'AAA'

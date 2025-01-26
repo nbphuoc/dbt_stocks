@@ -4,7 +4,7 @@ with
     ),
 
     renamed as (
-        select replace(date_day, '-', '') as pk_date_id, * from raw_generated_data
+        select replace(date_day, '-', '')::int as pk_date_id, * from raw_generated_data
     )
 
 select *
